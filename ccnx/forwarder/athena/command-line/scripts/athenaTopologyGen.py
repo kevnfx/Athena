@@ -46,7 +46,15 @@ graph = graph_from_dot_file(args.dotfile)
 # Setup dircetory variables
 keyfileName = 'keyfile'
 password = 'foo'
-build_dir = '../../../../../../../usr'
+
+import sys
+import os
+try:
+    build_dir = os.environ['CCNX_HOME']
+except KeyError:
+    print "You must set your CCNX_HOME environment variable."
+    sys.exit(0)
+
 athena = build_dir + '/bin/athena'
 athena_ctl = build_dir + '/bin/athenactl -f ' + keyfileName + ' -p ' + password
 
