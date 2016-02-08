@@ -97,7 +97,7 @@ do
     fi
     eval using=\${${program}}
     if [ "${using}" = "" ]; then
-        echo Couldn\'t locate ${appName}, set CCNX_HOME to its location.
+        echo Couldn\'t locate ${appName}, set CCNX_HOME or PARC_HOME to its location.
         exit 1
     fi
     echo Using ${program}=${using}
