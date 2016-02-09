@@ -3,5 +3,6 @@
 *.gcno
 *.lo
 .libs
+*.dylib
 
-libathena.la
+libathena.a

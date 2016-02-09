@@ -34,10 +34,46 @@ set(ATHENA_SOURCE_FILES
 	${ATHENA_PLATFORM_MODULES}
 	)
 
-add_library(athena         STATIC ${ATHENA_SOURCE_FILES})
+set(LIBATHENA_TCP_SOURCE_FILES
+    athena_TransportLinkModuleTCP.c
+    )
+
+set(LIBATHENA_UDP_SOURCE_FILES
+    athena_TransportLinkModuleUDP.c
+    )
+
+set(LIBATHENA_ETH_SOURCE_FILES
+    athena_TransportLinkModuleETH.c
+    )
+
+add_library(athena            STATIC ${ATHENA_SOURCE_FILES})
+
+add_library(athena_TCP.shared SHARED ${LIBATHENA_TCP_SOURCE_FILES})
+set_target_properties(athena_TCP.shared PROPERTIES
+  C_STANDARD 99
+  SOVERSION 1
+  VERSION 1.0
+  OUTPUT_NAME athena_TCP )
+
+add_library(athena_UDP.shared SHARED ${LIBATHENA_UDP_SOURCE_FILES})
+set_target_properties(athena_UDP.shared PROPERTIES
+  C_STANDARD 99
+  SOVERSION 1
+  VERSION 1.0
+  OUTPUT_NAME athena_UDP )
+
+add_library(athena_ETH.shared SHARED ${LIBATHENA_ETH_SOURCE_FILES})
+set_target_properties(athena_ETH.shared PROPERTIES
+  C_STANDARD 99
+  SOVERSION 1
+  VERSION 1.0
+  OUTPUT_NAME athena_ETH )
 
 set(athena_libraries
   athena
+  athena_TCP.shared
+  athena_UDP.shared
+  athena_ETH.shared
   )
 
 foreach(lib ${athena_libraries})

@@ -80,7 +80,7 @@ void
 _removeLink(void *context, PARCBitVector *parcBitVector)
 {
     assertNull(context, "_removeLink called with a non null argument");
-    AthenaTransportLinkAdapter *athenaTransportLinkAdapter = (AthenaTransportLinkAdapter *) context;
+    //AthenaTransportLinkAdapter *athenaTransportLinkAdapter = (AthenaTransportLinkAdapter *) context;
 }
 
 LONGBOW_TEST_CASE(Global, athenaTransportLinkModuleTCP_OpenClose)

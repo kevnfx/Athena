@@ -109,17 +109,6 @@ _addressToString(const u_int8_t *address, char *buffer)
     }
 }
 
-static void
-_headerToString(struct ether_header *header, char *buffer)
-{
-    char source[NI_MAXHOST] = { 0 };
-    char destination[NI_MAXHOST] = { 0 };
-
-    _addressToString(header->ether_shost, source);
-    _addressToString(header->ether_dhost, destination);
-    sprintf(buffer, "%s->%s 0x%x\n", source, destination, header->ether_type);
-}
-
 static _ETHLinkData *
 _ETHLinkData_Create()
 {
@@ -781,7 +770,7 @@ _ETHOpen(AthenaTransportLinkModule *athenaTransportLinkModule, PARCURI *connecti
     char name[MAXPATHLEN] = { 0 };
     char *linkName = NULL;
 
-    struct ether_addr srcMAC = { 0 };
+    struct ether_addr srcMAC = { {0} };
     bool srcMACSpecified = false;
 
     size_t mtu = 0;
