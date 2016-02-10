@@ -571,8 +571,8 @@ _UDPReceiveListener(AthenaTransportLink *athenaTransportLink)
 static int
 _setSocketOptions(AthenaTransportLinkModule *athenaTransportLinkModule, int fd)
 {
-    int on = 1;
 #ifdef BSD_IGNORESIGPIPE
+    int on = 1;
     int result = setsockopt(fd, SOL_SOCKET, SO_NOSIGPIPE, (void *) &on, sizeof(on));
     if (result) {
         parcLog_Error(athenaTransportLinkModule_GetLogger(athenaTransportLinkModule),

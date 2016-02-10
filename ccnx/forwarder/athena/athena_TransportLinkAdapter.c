@@ -423,9 +423,13 @@ _AddModule(AthenaTransportLinkAdapter *athenaTransportLinkAdapter, AthenaTranspo
     assertTrue(result, "parcArrayList_Add of module failed");
 }
 
-// This method is currently unused, but is available and still tested
+// This method is currently unused, but is available and is still diligently tested
+#ifdef __GNUC__
+__attribute__ ((unused)) 
+#else
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-function"
+#endif
 static int
 _RemoveModule(AthenaTransportLinkAdapter *athenaTransportLinkAdapter, const char *moduleName)
 {
@@ -443,7 +447,10 @@ _RemoveModule(AthenaTransportLinkAdapter *athenaTransportLinkAdapter, const char
     errno = ENOENT;
     return -1;
 }
+#ifndef __GNUC__
 #pragma GCC diagnostic pop
+#endif
+
 #include <ctype.h>
 
 static const char *
@@ -482,7 +489,11 @@ _moduleNameToEntryPoint(const char *moduleName)
 }
 
 #define LIBRARY_MODULE_PREFIX "libathena_"
+#ifdef __linux__
+#define LIBRARY_MODULE_SUFFIX ".so"
+#else // MacOS
 #define LIBRARY_MODULE_SUFFIX ".dylib"
+#endif
 
 static const char *
 _moduleNameToLibrary(const char *moduleName)
